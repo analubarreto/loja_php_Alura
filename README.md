@@ -21,5 +21,3 @@ Fedora 27 (em português - não testado): https://www.vivaolinux.com.br/artigo/A
 
 Arch Linux (em inglês): https://www.linode.com/docs/web-servers/lamp/how-to-install-a-lamp-stack-on-arch-linux/
 Arch Linux (em português): https://medium.com/matheus-rossi/configurando-um-servidor-lamp-no-manjaro-linux-arch-based-41e285d820da
-
-Ps:. É muito provável que eu vá modificar esse sistema com o tempo para o código e as funcionalidades do mesmo.

@@ -2,7 +2,8 @@
 Projeto de Sistema de Loja com a Alura
 
 Esse é um sistema feito no andamento do curso PHP e MySQLI da Alura, do grupo Caelum.
-Poucas modificações em poucas funcionalidades foram feitas, nada que altere o funcionamento global, apenas que melhora a usabilidade do sistema.
+Foram utilizadas as tecnologias HTML e php, além da biblioteca Bootstrap, versão 4.3.0.
+Poucas modificações em poucas funcionalidades foram feitas, nada que altere o funcionamento global, apenas que melhora a usabilidade do sistema e adequar a versão atual da biblioteca Bootstrap.
 
 Caso queira testar as funcionalidades do projeto, tenha o XAMPP instalado no seu computador Windows ou o LAMP para sistemas Linux.
 

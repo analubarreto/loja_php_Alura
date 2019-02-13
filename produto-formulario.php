@@ -1,9 +1,14 @@
 <?php
-
+// Requere arquivos necessários
 require_once "cabecalho.php";
 require_once "conecta.php";
 require_once "banco-categoria.php";
+require_once "logica-usuario.php";
 
+// Verifica se o usuário está logado
+verificaUsuario();
+
+// Seta categoria igual a função
 $categorias = listaCategorias($conexao);
 
 ?>

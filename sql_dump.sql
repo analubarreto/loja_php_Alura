@@ -1,5 +1,3 @@
-CREATE DATABASE lojadb;
-
 USE lojadb;
 
 DROP TABLE produtos;
@@ -17,8 +15,12 @@ INSERT INTO produtos (nome, preco) VALUES('Livro Stephen King', 75);
 DELETE FROM produtos WHERE id=9;
 
 ALTER TABLE produtos ADD COLUMN descricao TEXT;
+ALTER TABLE produtos ADD COLUMN categoria_id INTEGER NOT NULL;
+ALTER TABLE produtos ADD COLUMN usado BOOLEAN DEFAULT FALSE;
 
 UPDATE produtos SET descricao = "Descrição desse produto";
+UPDATE produtos SET categoria_id=3;
+UPDATE produtos SET categoria_id=4 WHERE id=15;
 
 SELECT * FROM produtos;
 

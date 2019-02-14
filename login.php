@@ -10,13 +10,13 @@ $usuario = buscaUsuario($conexao, $_POST['email'], $_POST['senha']);
 
 // Chamada da função usuário
 if ($usuario == null) {
-	// Voltar para a página index.php com login setado para FALSE
-	header("Location: index.php?login=0");
+	$_SESSION["danger"] = "Usuário ou senha inválido";
+	header("Location: index.php");
 } else {
 	// Set cookie usuario_logado
 	logaUsuario($usuario["email"]);
-	// Voltar para a página index.php com login setado para TRUE
-	header("Location: index.php?login=1");
+	$_SESSION["success"] = "Usuário logado com sucesso";
+	header("Location: index.php");
 }
 
 die();

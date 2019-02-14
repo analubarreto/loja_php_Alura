@@ -4,6 +4,7 @@
 require_once "conecta.php";
 require_once "cabecalho.php";
 require_once "banco-produto.php";
+require_once "logica-usuario.php";
 
 ?>
 
@@ -17,16 +18,12 @@ require_once "banco-produto.php";
 </div>
 
 <?php 
+	if(isset($_SESSION["success"])) {?>
+		<p class="alert-success"><?= $_SESSION["success"]?></p>
+<?php } ?>
 
-if(array_key_exists("removido", $_GET) && $_GET['removido'] == true) {
-?>
-	
-	<p class="alert-success">Produto apagado com sucesso!</p>
-	
-<?php
-	
-	}
-
+<?php 
+	unset($_SESSION["success"]);
 ?>
 
 <!-- inicio tabela -->

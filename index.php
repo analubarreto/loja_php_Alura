@@ -3,20 +3,23 @@ require_once "cabecalho.php";
 require_once "logica-usuario.php";
 ?>
 
+<?php
+	if(isset($_SESSION["success"])) {?>
+		<p class="alert-success"><?= $_SESSION["success"]?></p>
+<?php } ?>
+
 <?php 
-	if(isset($_GET["login"]) && $_GET["login"] == true) { ?>
-		<p class="alert-success">Logado com sucesso!</p>
-<?php } ?>
+	unset($_SESSION["success"]);
+?>
 
 <?php
-	if(isset($_GET["login"]) && $_GET["login"] == false) { ?> 
-		<p class="alert-danger">Usuário ou senha invalido(a)!</p>
+	if(isset($_SESSION["danger"])) {?>
+		<p class="alert-danger"><?= $_SESSION["danger"]?></p>
 <?php } ?>
 
-<?php
-	if(isset($_GET["falhaDeSeguranca"])) {?>
-		<p class="alert-danger">Você não tem acesso a essa funcionalidade!</p>
-<?php } ?>
+<?php 
+	unset($_SESSION["danger"]);
+?>
 	
 
 
@@ -31,7 +34,9 @@ require_once "logica-usuario.php";
 
 			<!-- começo está logado como... -->
 			<?php if(usuarioEstaLogado()) { ?>
-				<p class="text-success">Você está logado como <?= usuarioLogado() ?></p>
+				<p class="text-success">Você está logado como <?= usuarioLogado() ?>
+					<a href="logout.php">Deslogar</a>
+				</p>
 
 		<!-- começo sem usuário logado -->
 			<?php } else { ?>

@@ -41,4 +41,4 @@ $categorias = listaCategorias($conexao);
 
 
 
-<?php require_once "rodape.php" ?>
+<?php require_once "../rodape.php" ?>

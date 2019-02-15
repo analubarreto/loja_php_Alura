@@ -26,7 +26,7 @@ if(array_key_exists($usado = $_POST['usado'], $_POST)) {
 
 if(insereProduto($conexao, $nome, $preco, $descricao, $categoria_id, $usado)) { 
 	?>
-	<form action="produto-formulario.php">
+	<form action="../produto/produto-formulario.php">
 		
 		<p class="text-success"> O produto <?php echo $nome?>, R$<?php echo $preco?> adicionado com sucesso! </p>
 		<button class="btn" type="submit">Voltar</button>
@@ -57,4 +57,4 @@ mysqli_close($conexao);
 ?>
 	
 
-<?php require_once "rodape.php" ?>
+<?php require_once "../rodape.php" ?>

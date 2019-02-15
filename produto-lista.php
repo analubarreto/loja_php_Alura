@@ -77,5 +77,5 @@ require_once "mostra-alerta.php";
 
 <?php		
 	// Requisição do rodape.php
-	require_once "rodape.php";
+	require_once "../rodape.php";
 ?>

@@ -30,7 +30,7 @@ require_once "mostra-alerta.php";
 			>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link disabled" href="sobre.php" tabindex="-1" aria-disabled="true">Sobre</a>
+			<a class="nav-link disabled" href="contato.php">Contato</a>
 		</li>
 	</ul>
 

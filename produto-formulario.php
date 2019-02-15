@@ -8,6 +8,8 @@ require_once "logica-usuario.php";
 // Verifica se o usuário está logado
 verificaUsuario();
 
+$produtos = array("nome" => "", "descricao" => "", "preco" => "", "categoria_id" => "");
+$usado = "";
 // Seta categoria igual a função
 $categorias = listaCategorias($conexao);
 
@@ -21,39 +23,7 @@ $categorias = listaCategorias($conexao);
 			<div class="col-md-12">
 				<form action="adiciona-produto.php" method="post">
 
-					<table class="table">
-						<tr>
-							<td>Nome:</td> 
-							<td><input class="form-control" type="text" name="nome"></td>
-						</tr>
-
-						<tr>
-							<td>Preço:</td> 
-							<td><input class="form-control" type="number" name="preco"></td>
-						</tr>
-
-						<tr>
-							<td>Descrição:</td> 
-							<td><textarea name="descricao" cols="15" rows="5" class="form-control"></textarea></td>
-						</tr>
-
-						<tr>
-							<td></td>
-							<td><input type="checkbox" name="usado" value="true"> Usado</td>
-						</tr>
-
-						<tr>
-							<td>Categoria:</td>
-						    <td>
-						    	<select name="categoria_id">
-							        <?php foreach($categorias as $categoria) : ?>
-							        <option type="radio" name="categoria_id" value="<?=$categoria['id']?>" class="form-control">
-							        	<?=$categoria['nome']?>		
-							        </option>
-							        <?php endforeach ?>
-							    </select>
-						    </td>
-						</tr>
+					<?php require_once "produto-formulario-base.php" ?>
 
 						<tr>
 							<td>

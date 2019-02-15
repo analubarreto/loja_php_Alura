@@ -1,3 +1,10 @@
+<?php 
+
+error_reporting(E_ALl ^ E_NOTICE);
+require_once "mostra-alerta.php";
+
+?>
+
 <html>
 <head>
 	
@@ -30,3 +37,11 @@
 	<div class="container">
 		
 		<div class="principal">
+			<?php
+				// Requisições
+				require_once "mostra-alerta.php";
+
+				// Chamada de funções 
+				mostraAlerta("success");
+				mostraAlerta("danger");
+				 ?>

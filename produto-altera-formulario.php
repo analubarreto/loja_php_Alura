@@ -9,7 +9,7 @@ $id = $_GET['id'];
 $produto = buscaProduto($conexao, $id);
 $categorias = listaCategorias($conexao);
 // Se for usado, setar o botão checked = checked, se não, devolver ele vazio
-$usado = $produto['usado'] ? "checked='checked'" : "";
+$produto->usado = $produto['usado'] ? "checked='checked'" : "";
 
 ?>
 

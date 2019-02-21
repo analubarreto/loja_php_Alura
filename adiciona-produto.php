@@ -21,7 +21,7 @@ $produto->preco = $_POST["preco"];
 $produto->descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
 $produto->categoria = $categoria;
 
-if(array_key_exists($produto->usado = 'usado', $_POST)) {
+if(array_key_exists('usado', $_POST)) {
 	$produto->usado = "true";
 } else {
 	// Quando você concatena strings false é uma string vazia, ela não é zero
@@ -30,8 +30,7 @@ if(array_key_exists($produto->usado = 'usado', $_POST)) {
 
 
 
-if(insereProduto($conexao, $produto)) { 
-	?>
+if(insereProduto($conexao, $produto)) { ?>
 	<form action="produto-formulario.php">
 		
 		<p class="text-success"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> adicionado com sucesso! </p>
@@ -47,7 +46,7 @@ if(insereProduto($conexao, $produto)) {
  	?>
 	<form action="produto-formulario.php">
 
-		<p class="text-danger"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco;?> não foi adicionado: <?php $msg; ?> </p>
+		<p class="text-danger"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> não foi adicionado </p>
 		<button class="btn" type="submit">Voltar</button>
 
 	</form>

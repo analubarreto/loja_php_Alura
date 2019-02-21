@@ -48,14 +48,15 @@ require_once "mostra-alerta.php";
 		<?php
 			// Para cada um desses produtos dentro do array produto, chama de produto
 			// Início foreach
+			$produtos = listaProdutos($conexao);
 			foreach($produtos as $produto) :
 			?>
 
 			    <tr>
-			        <td><?=$produto['nome']?></td>
-			        <td><?=$produto['preco']?></td>
-			        <td><?= substr($produto['descricao'], 0, 15) ?></td>
-			        <td><?=$produto['categoria_nome']?></td>
+			        <td><?=$produto->nome?></td>
+			        <td><?=$produto->preco?></td>
+			        <td><?= substr($produto->descricao, 0, 15) ?></td>
+			        <td><?=$produto->categoria->nome?></td>
 			        <td>
 			        	<a href="produto-altera-formulario.php?id=<?=$produto['id']?>" class="btn btn-primary">alterar</a>
 			        </td>
@@ -77,5 +78,5 @@ require_once "mostra-alerta.php";
 
 <?php		
 	// Requisição do rodape.php
-	require_once "../rodape.php";
+	require_once "rodape.php";
 ?>

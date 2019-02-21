@@ -8,8 +8,10 @@ require_once "banco-produto.php";
 $id = $_GET['id'];
 $produto = buscaProduto($conexao, $id);
 $categorias = listaCategorias($conexao);
+
+$selecao_usado = $produto->usado ? "checked='checked'" : "";
 // Se for usado, setar o botão checked = checked, se não, devolver ele vazio
-$produto->usado = $produto['usado'] ? "checked='checked'" : "";
+$produto->usado = $selecao_usado;
 
 ?>
 
@@ -21,7 +23,7 @@ $produto->usado = $produto['usado'] ? "checked='checked'" : "";
 			<div class="col-md-12">
 				<form action="produto-altera.php" method="post">
 					<!-- Campo de id escondido -->
-					<input type="hidden" name="id" value="<?=$produto['id']?>" />
+					<input type="hidden" name="id" value="<?=$produto->id?>" />
 
 						<?php require_once "produto-formulario-base.php" ?>
 						

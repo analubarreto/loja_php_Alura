@@ -1,22 +1,22 @@
 <table class="table">
 	<tr>
 		<td>Nome:</td> 
-		<td><input class="form-control" type="text" name="nome" value="<?=$produto['nome']?>"></td>
+		<td><input class="form-control" type="text" name="nome" value="<?=$produto->nome?>"></td>
 	</tr>
 
 	<tr>
 		<td>Preço:</td> 
-		<td><input class="form-control" type="number" name="preco" value="<?=$produto['preco']?>"></td>
+		<td><input class="form-control" type="number" name="preco" value="<?=$produto->preco?>"></td>
 	</tr>
 
 	<tr>
 		<td>Descrição:</td> 
-		<td><textarea name="descricao" cols="15" rows="5" class="form-control"><?=$produto['descricao']?></textarea></td>
+		<td><textarea name="descricao" cols="15" rows="5" class="form-control"><?=$produto->descricao?></textarea></td>
 	</tr>
 
 	<tr>
 		<td></td>
-		<td><input type="checkbox" name="usado" value="true" <?=$usado?>> Usado</td>
+		<td><input type="checkbox" name="usado" value="true" <?=$produto->usado?>> Usado</td>
 	</tr>
 
 	<tr>

@@ -7,12 +7,14 @@ require_once "class/Produto.php";
 require_once "banco-produto.php";
 
 // Declarações
+$categoria = new Categoria();
+$categoria->id = $_POST['categoria_id'];
+
 $produto = new Produto();
 $produto->id = $_POST["id"];
 $produto->nome = $_POST["nome"];
 $produto->preco = $_POST["preco"];
 $produto->descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
-$produto->categoria_id = $_POST['categoria_id'];
 
 if(array_key_exists('usado', $_POST)) {
 	$produto->usado = "true";
@@ -21,7 +23,7 @@ if(array_key_exists('usado', $_POST)) {
 	$produto->usado = "false";
 }
 
-
+$produto->categoria = $categoria;
 
 if(alteraProduto($conexao, $produto)) {
 	?>

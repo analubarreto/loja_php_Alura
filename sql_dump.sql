@@ -35,3 +35,13 @@ INSERT INTO categorias (nome) VALUES ("esporte"), ("escolar"), ("mobilidade");
 INSERT INTO categorias (nome) VALUES ("guloseimas");
 
 SELECT * FROM categorias;
+
+////////////////////////////////////////
+
+CREATE TABLE usuarios (
+	id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	email VARCHAR(255) NOT NULL,
+	senha VARCHAR(255) NOT NULL
+);
+
+SELECT * FROM usuarios;

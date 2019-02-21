@@ -4,12 +4,20 @@ require_once "cabecalho.php";
 require_once "conecta.php";
 require_once "banco-categoria.php";
 require_once "logica-usuario.php";
+require_once "class/Categoria.php";
+require_once "class/Produto.php";
 
 // Verifica se o usuário está logado
 verificaUsuario();
 
-$produtos = array("nome" => "", "descricao" => "", "preco" => "", "categoria_id" => "");
-$usado = "";
+// Criando novos objetos
+$categoria = new Categoria();
+$categoria->id = 1;
+
+$produto = new Produto();
+$produto->categoria = $categoria;
+
+$categorias = listaCategorias($conexao);
 // Seta categoria igual a função
 $categorias = listaCategorias($conexao);
 
@@ -41,4 +49,4 @@ $categorias = listaCategorias($conexao);
 
 
 
-<?php require_once "../rodape.php" ?>
+<?php require_once "rodape.php" ?>

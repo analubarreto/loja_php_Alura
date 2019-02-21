@@ -4,6 +4,7 @@
 require_once "conecta.php";
 require_once "cabecalho.php";
 require_once "class/Produto.php";
+require_once "class/Categoria.php";
 require_once "banco-produto.php";
 require_once "logica-usuario.php";
 
@@ -11,13 +12,16 @@ require_once "logica-usuario.php";
 verificaUsuario();
 
 // Declarações
+$categoria = new Categoria();
+$categoria->id = $_POST['categoria_id'];
+
 $produto = new Produto();
 $produto->nome = $_POST["nome"];
 $produto->preco = $_POST["preco"];
 $produto->descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
-$produto->categoria_id = $_POST['categoria_id'];
+$produto->categoria = $categoria;
 
-if(array_key_exists($produto->usado = $_POST['usado'], $_POST)) {
+if(array_key_exists($produto->usado = 'usado', $_POST)) {
 	$produto->usado = "true";
 } else {
 	// Quando você concatena strings false é uma string vazia, ela não é zero
@@ -28,7 +32,7 @@ if(array_key_exists($produto->usado = $_POST['usado'], $_POST)) {
 
 if(insereProduto($conexao, $produto)) { 
 	?>
-	<form action="../produto/produto-formulario.php">
+	<form action="produto-formulario.php">
 		
 		<p class="text-success"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> adicionado com sucesso! </p>
 		<button class="btn" type="submit">Voltar</button>
@@ -38,7 +42,6 @@ if(insereProduto($conexao, $produto)) {
 <?php
  } else { 
 
- 	require_once "formulario-inicio.php"; 
  	$msg = mysqli_error($conexao);
 
  	?>
@@ -50,7 +53,6 @@ if(insereProduto($conexao, $produto)) {
 	</form>
 
 	<?php 
-	require_once "formulario-fim.php";
 }
 
 // Fechar a conexão: não é necessário colocar, o php fecha a conexão automaticamente para a gente
@@ -59,4 +61,4 @@ mysqli_close($conexao);
 ?>
 	
 
-<?php require_once "../rodape.php" ?>
+<?php require_once "rodape.php" ?>

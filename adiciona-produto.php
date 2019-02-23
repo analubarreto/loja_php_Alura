@@ -13,19 +13,19 @@ verificaUsuario();
 
 // Declarações
 $categoria = new Categoria();
-$categoria->id = $_POST['categoria_id'];
+$categoria->setId($_POST['categoria_id']);
 
 $produto = new Produto();
-$produto->nome = $_POST["nome"];
-$produto->preco = $_POST["preco"];
-$produto->descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
-$produto->categoria = $categoria;
+$produto->setNome($_POST["nome"]);
+$produto->preco($_POST["preco"]);
+$produto->descricao($_POST["descricao"]); // Enviando a descrição através do corpo
+$produto->setCategoria($categoria->setNome($categoria));
 
 if(array_key_exists('usado', $_POST)) {
-	$produto->usado = "true";
+	$produto->setUsado("true");
 } else {
 	// Quando você concatena strings false é uma string vazia, ela não é zero
-	$produto->usado = "false";
+	$produto->setUsado("false");
 }
 
 
@@ -33,7 +33,7 @@ if(array_key_exists('usado', $_POST)) {
 if(insereProduto($conexao, $produto)) { ?>
 	<form action="produto-formulario.php">
 		
-		<p class="text-success"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> adicionado com sucesso! </p>
+		<p class="text-success"> O produto <?php echo $produto->getNome()?>, R$<?php echo $produto->getPreco()?> adicionado com sucesso! </p>
 		<button class="btn" type="submit">Voltar</button>
 
 	</form>
@@ -46,7 +46,7 @@ if(insereProduto($conexao, $produto)) { ?>
  	?>
 	<form action="produto-formulario.php">
 
-		<p class="text-danger"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> não foi adicionado
+		<p class="text-danger"> O produto <?php echo $produto->getNome?>, R$<?php echo $produto->getPreco()?> não foi adicionado
 		<br><span>Erro: <?=var_dump($msg);?></span></p>
 		<button class="btn" type="submit">Voltar</button>
 

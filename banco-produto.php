@@ -6,7 +6,7 @@ require_once "class/Categoria.php";
 
 // INSERIR PRODUTOS
 function insereProduto($conexao, Produto $produto) {
-	$query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado) VALUES('{$produto->nome}', {$produto->preco}, '{$produto->descricao}', {$produto->categoria->id}, {$produto->usado})";
+	$query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->getUsado()})";
 
 	// Retorno da execução da conexão (conexão, query)
 	return mysqli_query($conexao, $query);
@@ -23,14 +23,14 @@ function listaProdutos($conexao) {
 	while($produto_array = mysqli_fetch_assoc($resultado)) {
 
 		$categoria = new Categoria();
-		$categoria->nome = $produto_array['categoria_nome'];
+		$categoria->setNome($produto_array['categoria_nome']);
 
 		$produto = new Produto();
-		$produto->nome = $produto_array['nome'];
-		$produto->descricao = $produto_array['descricao'];
-		$produto->categoria = $categoria;
-		$produto->preco = $produto_array['preco'];
-		$produto->usado = $produto_array['usado'];
+		$produto->setNome($produto_array['nome']);
+		$produto->setDescricao($produto_array['descricao']);
+		$produto->setCategoria($categoria->setNome($categoria));
+		$produto->setPreco($produto_array['preco']);
+		$produto->setUsado($produto_array['usado']);
 
 		// Colocar dentro do array produtos, o produto
 		array_push($produtos, $produto);
@@ -50,13 +50,13 @@ function buscaProduto($conexao, $id) {
 
 // ALTERA PRODUTO
 function alteraProduto($conexao, Produto $produto) {
-	$query = "UPDATE produtos SET nome = '{$produto->nome}', preco = {$produto->preco}, descricao = '{$produto->descricao}', 
-        categoria_id= {$produto->categoria->id}, usado = {$produto->usado} WHERE id = '{$produto->id}'";
+	$query = "UPDATE produtos SET nome = '{$produto->getNome()}', preco = {$produto->preco}, descricao = '{$produto->getDescricao()}', 
+        categoria_id= {$produto->categoria->getId()}, usado = {$produto->getUsado()} WHERE id = '{$produto->getId()}'";
 	return mysqli_query($conexao, $query);
 }
 
 // REMOVER PRODUTO
 function removeProduto($conexao, $id) {
-	$query = "DELETE FROM produtos WHERE id = {$produto->id}";
+	$query = "DELETE FROM produtos WHERE id = {$id}";
 	return mysqli_query($conexao, $query);
 }

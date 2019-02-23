@@ -8,9 +8,9 @@ $id = $_GET['id'];
 $produto = buscaProduto($conexao, $id);
 $categorias = listaCategorias($conexao);
 
-$selecao_usado = $produto->usado ? "checked='checked'" : "";
+$selecao_usado = $produto->getUsado() ? "checked='checked'" : "";
 // Se for usado, setar o botão checked = checked, se não, devolver ele vazio
-$produto->usado = $selecao_usado;
+$produto->setUsado($selecao_usado);
 
 ?>
 
@@ -21,7 +21,7 @@ $produto->usado = $selecao_usado;
 		</div>
 			<div class="col-md-12">
 				<form action="altera-produto.php" method="post">
-					<input type="hidden" name="id" value="<?=$produto->id?>">
+					<input type="hidden" name="id" value="<?=$produto->getId()?>">
 					<table class="table">
 						<?php require_once "produto-formulario-base.php"; ?>
 						<tr>

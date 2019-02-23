@@ -12,10 +12,10 @@ verificaUsuario();
 
 // Criando novos objetos
 $categoria = new Categoria();
-$categoria->id = 1;
+$categoria->setId(1);
 
 $produto = new Produto();
-$produto->categoria = $categoria;
+$produto->categoria = $getCategoria();
 
 $categorias = listaCategorias($conexao);
 // Seta categoria igual a função

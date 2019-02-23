@@ -1,4 +1,8 @@
 <?php 
+require_once "conecta.php";
+require_once "class/Produto.php";
+require_once "class/Categoria.php";
+
 
 // INSERIR PRODUTOS
 function insereProduto($conexao, Produto $produto) {

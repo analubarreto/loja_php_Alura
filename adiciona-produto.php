@@ -6,7 +6,7 @@ require_once "cabecalho.php";
 require_once "class/Produto.php";
 require_once "class/Categoria.php";
 require_once "banco-produto.php";
-require_once "logica-usuario.php";
+require_once "logica-usuario.php";;
 
 // Verifica se o usuário está logado
 verificaUsuario();
@@ -46,7 +46,8 @@ if(insereProduto($conexao, $produto)) { ?>
  	?>
 	<form action="produto-formulario.php">
 
-		<p class="text-danger"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> não foi adicionado </p>
+		<p class="text-danger"> O produto <?php echo $produto->nome?>, R$<?php echo $produto->preco?> não foi adicionado
+		<br><span>Erro: <?=var_dump($msg);?></span></p>
 		<button class="btn" type="submit">Voltar</button>
 
 	</form>

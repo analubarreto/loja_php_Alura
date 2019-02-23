@@ -5,6 +5,8 @@ require_once "conecta.php";
 require_once "banco-usuario.php";
 require_once "logica-usuario.php";
 
+session_start();
+
 // Declarações
 $usuario = buscaUsuario($conexao, $_POST['email'], $_POST['senha']);
 

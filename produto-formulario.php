@@ -15,7 +15,7 @@ $categoria = new Categoria();
 $categoria->setId(1);
 
 $produto = new Produto();
-$produto->categoria = $getCategoria();
+$produto->setCategoria($categoria);
 
 $categorias = listaCategorias($conexao);
 // Seta categoria igual a função

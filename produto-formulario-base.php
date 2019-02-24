@@ -16,7 +16,7 @@
 
 	<tr>
 		<td></td>
-		<td><input type="checkbox" name="usado" value="true" <?=$produto->getUsado()?>> Usado</td>
+		<td><input type="checkbox" name="usado" value="true" <?=$produto->isUsado()?>> Usado</td>
 	</tr>
 
 	<tr>

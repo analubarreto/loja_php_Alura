@@ -2,7 +2,6 @@
 
 class Produto {
 
-	// Atributos
 	private $id;
 	private $nome;
 	private $preco;
@@ -10,15 +9,12 @@ class Produto {
 	private $categoria;
 	private $usado;
 
-	// Métodos
-	// Tem 0.1 como valor padrão
 	public function precoComDesconto($valor = 0.1) {
 		if ($valor > 0 && $valor <= 0.5) {
 			return $this->preco - ($this->preco * $valor);
 		}	
 	}
 
-	// Getters e setters
 	public function getId() {
 		return $this->id;
 	}
@@ -58,10 +54,10 @@ class Produto {
 	}
 
 	public function setCategoria($categoria) {
-		$this->categoria_id = $categoria;
+		$this->categoria = $categoria;
 	}
 
-	public function getUsado() {
+	public function isUsado() {
 		return $this->usado;
 	}
 

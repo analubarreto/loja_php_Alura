@@ -17,8 +17,8 @@ $categoria->setId($_POST['categoria_id']);
 
 $produto = new Produto();
 $produto->setNome($_POST["nome"]);
-$produto->preco($_POST["preco"]);
-$produto->descricao($_POST["descricao"]); // Enviando a descrição através do corpo
+$produto->setPreco($_POST["preco"]);
+$produto->setDescricao($_POST["descricao"]); // Enviando a descrição através do corpo
 $produto->setCategoria($categoria->setNome($categoria));
 
 if(array_key_exists('usado', $_POST)) {

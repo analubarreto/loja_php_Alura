@@ -9,6 +9,7 @@ $produto = buscaProduto($conexao, $id);
 $categorias = listaCategorias($conexao);
 
 $selecao_usado = $produto->isUsado() ? "checked='checked'" : "";
+
 // Se for usado, setar o botão checked = checked, se não, devolver ele vazio
 $produto->setUsado(selecao_usado());
 

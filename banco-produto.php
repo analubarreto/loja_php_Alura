@@ -22,12 +22,13 @@ function listaProdutos($conexao) {
 		$categoria = new Categoria();
 		$categoria->setNome($produto_array['categoria_nome']);
 
-		$produto = new Produto();
-		$produto->setNome($produto_array['nome']);
-		$produto->setDescricao($produto_array['descricao']);
-		$produto->setCategoria($categoria);
-		$produto->setPreco($produto_array['preco']);
-		$produto->setUsado($produto_array['usado']);
+		$nome = $produto_array['nome'];
+		$preco = $produto_array['preco'];
+		$descricao = $produto_array['descricao'];
+		$categoria = $categoria;
+		$usado = $produto_array['usado'];
+
+		$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 
 		array_push($produtos, $produto);
 

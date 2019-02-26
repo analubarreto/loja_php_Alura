@@ -15,20 +15,14 @@ verificaUsuario();
 $categoria = new Categoria();
 $categoria->setId($_POST['categoria_id']);
 
-$produto = new Produto();
-$produto->setNome($_POST["nome"]);
-$produto->setPreco($_POST["preco"]);
-$produto->setDescricao($_POST["descricao"]); // Enviando a descrição através do corpo
-$produto->setCategoria($categoria->setNome($categoria));
+$nome = $_POST["nome"];
+$preco = $_POST["preco"];
+$descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
+$categoria = $categoria->setNome($categoria);
 
-if(array_key_exists('usado', $_POST)) {
-	$produto->setUsado("true");
-} else {
-	// Quando você concatena strings false é uma string vazia, ela não é zero
-	$produto->setUsado("false");
-}
+array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
 
-
+$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 
 if(insereProduto($conexao, $produto)) { ?>
 	<form action="produto-formulario.php">
@@ -46,7 +40,7 @@ if(insereProduto($conexao, $produto)) { ?>
  	?>
 	<form action="produto-formulario.php">
 
-		<p class="text-danger"> O produto <?php echo $produto->getNome?>, R$<?php echo $produto->getPreco()?> não foi adicionado
+		<p class="text-danger"> O produto <?php echo $produto->getNome()?>, R$<?php echo $produto->getPreco()?> não foi adicionado
 		<br><span>Erro: <?=var_dump($msg);?></span></p>
 		<button class="btn" type="submit">Voltar</button>
 

@@ -10,20 +10,13 @@ require_once "banco-produto.php";
 $categoria = new Categoria();
 $categoria->id = $_POST['categoria_id'];
 
-$produto = new Produto();
-$produto->setId($_POST["id"]);
-$produto->setNome($_POST["nome"]);
-$produto->setPreco($_POST["preco"]);
-$produto->setDescricao($_POST["descricao"]); // Enviando a descrição através do corpo
+$nome = $_POST["nome"];
+$preco = $_POST["preco"];
+$descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
+$categoria = $categoria->setNome($categoria);
 
-if(array_key_exists('usado', $_POST)) {
-	$produto->setUsado("true") ;
-} else {
-	// Quando você concatena strings false é uma string vazia, ela não é zero
-	$produto->setUsado("false");
-}
-
-$produto->setCategoria($categoria);
+array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
+$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 
 if(alteraProduto($conexao, $produto)) {
 	?>

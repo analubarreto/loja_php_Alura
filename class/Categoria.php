@@ -11,6 +11,7 @@ class Categoria {
 
 	public function setId($id) {
 		$this->id = $id;
+		return $this;
 	}
 
 	public function getNome() {
@@ -19,6 +20,7 @@ class Categoria {
 
 	public function setNome($nome) {
 		$this->nome = $nome;
+		return $this;
 	}
 }
 

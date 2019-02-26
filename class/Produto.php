@@ -21,6 +21,7 @@ class Produto {
 
 	public function setId($id) {
 		$this->id = $id;
+		return $this;
 	}
 
 	public function getNome() {
@@ -29,6 +30,7 @@ class Produto {
 
 	public function setNome($nome) {
 		$this->nome = $nome;
+		return $this;
 	}
 
 	public function getPreco() {
@@ -47,6 +49,7 @@ class Produto {
 
 	public function setDescricao($descricao) {
 		$this->descricao = $descricao;
+		return $this;
 	}
 
 	public function getCategoria() {
@@ -55,6 +58,7 @@ class Produto {
 
 	public function setCategoria($categoria) {
 		$this->categoria = $categoria;
+		return $this;
 	}
 
 	public function isUsado() {
@@ -63,6 +67,7 @@ class Produto {
 
 	public function setUsado($usado) {
 		$this->usado = $usado;
+		return $this;
 	}
 	
 }

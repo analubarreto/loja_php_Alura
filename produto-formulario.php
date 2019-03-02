@@ -1,23 +1,18 @@
 <?php
-// Requere arquivos necessários
+
 require_once "cabecalho.php";
 require_once "conecta.php";
-require_once "banco-categoria.php";
 require_once "logica-usuario.php";
-require_once "class/Categoria.php";
-require_once "class/Produto.php";
 
-// Verifica se o usuário está logado
 verificaUsuario();
 
-// Criando novos objetos
 $categoria = new Categoria();
 $categoria->setId(1);
 
 $produto = new Produto("", "", "", $categoria, "");
 
-// Seta categoria igual a função
-$categorias = listaCategorias($conexao);
+$categoriaDAO = new CategoriaDAO($conexao);
+$categorias = $categoriaDAO->listaCategorias();
 
 ?>
 

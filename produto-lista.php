@@ -2,7 +2,6 @@
 
 // Requisições
 require_once "cabecalho.php";
-require_once "banco-produto.php";
 
 ?>
 
@@ -30,8 +29,8 @@ require_once "banco-produto.php";
 <table class="table">
 	<thead>
 		<?php 
-			// Chamar a função listaProdutos com $conexão como parâmetro
-			$produtos = listaProdutos($conexao);
+			$produtoDAO = new ProdutoDAO($conexao);
+			$produtos = $produtoDAO->listaProdutos();
 
 		?>
 
@@ -47,7 +46,7 @@ require_once "banco-produto.php";
 		<?php
 			// Para cada um desses produtos dentro do array produto, chama de produto
 			// Início foreach
-			$produtos = listaProdutos($conexao);
+			$produtos = $produtoDAO->listaProdutos($conexao);
 			foreach($produtos as $produto) :
 			?>
 

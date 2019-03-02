@@ -1,12 +1,8 @@
 <?php 
 
-// Requisições
 require_once "conecta.php";
 require_once "cabecalho.php";
-require_once "class/Produto.php";
-require_once "banco-produto.php";
 
-// Declarações
 $categoria = new Categoria();
 $categoria->id = $_POST['categoria_id'];
 
@@ -18,7 +14,9 @@ $categoria = $categoria->setNome($categoria);
 array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
 $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 
-if(alteraProduto($conexao, $produto)) {
+$produtoDAO = new ProdutoDAO($conexao);
+
+if($produtoDAO->alteraProduto($produto)) {
 	?>
 	<form action="produto-lista.php">
 		

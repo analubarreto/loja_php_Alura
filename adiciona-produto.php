@@ -2,11 +2,8 @@
 
 // Requisições
 require_once "conecta.php";
-require_once "cabecalho.php";
-require_once "class/Produto.php";
-require_once "class/Categoria.php";
-require_once "banco-produto.php";
-require_once "logica-usuario.php";;
+require_once "cabecalho.php";;
+require_once "logica-usuario.php";
 
 // Verifica se o usuário está logado
 verificaUsuario();
@@ -24,7 +21,9 @@ array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
 
 $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 
-if(insereProduto($conexao, $produto)) { ?>
+$produtoDAO = new ProdutoDAO($conexao);
+
+if($produtoDAO->insereProduto($produto)) { ?>
 	<form action="produto-formulario.php">
 		
 		<p class="text-success"> O produto <?php echo $produto->getNome()?>, R$<?php echo $produto->getPreco()?> adicionado com sucesso! </p>

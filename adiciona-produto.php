@@ -1,6 +1,5 @@
 <?php 
 
-// Requisições
 require_once "conecta.php";
 require_once "cabecalho.php";;
 require_once "logica-usuario.php";
@@ -8,18 +7,21 @@ require_once "logica-usuario.php";
 // Verifica se o usuário está logado
 verificaUsuario();
 
-// Declarações
 $categoria = new Categoria();
 $categoria->setId($_POST['categoria_id']);
 
 $nome = $_POST["nome"];
 $preco = $_POST["preco"];
-$descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
+$descricao = $_POST["descricao"];
 $categoria = $categoria->setNome($categoria);
+$isbn = $_POST["isbn"];
+$tipoProduto = $_POST["tipoProduto"];
 
 array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
 
 $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+$produto->setIsbn($isbn);
+$produto->setTipoProduto($tipoProduto);
 
 $produtoDAO = new ProdutoDAO($conexao);
 
@@ -48,7 +50,6 @@ if($produtoDAO->insereProduto($produto)) { ?>
 	<?php 
 }
 
-// Fechar a conexão: não é necessário colocar, o php fecha a conexão automaticamente para a gente
 mysqli_close($conexao);
 
 ?>

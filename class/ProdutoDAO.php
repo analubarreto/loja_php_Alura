@@ -9,7 +9,7 @@ class ProdutoDAO {
     }
 
     function insereProduto(Produto $produto) {
-        $query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->isUsado()})";
+        $query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado, isbn, tipoProduto) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->isUsado()}, '{$produto->getIsbn()}', '{$produto->getTipoProduto()}')";
     
         // Retorno da execução da conexão (conexão, query)
         return mysqli_query($this->conexao, $query);
@@ -32,8 +32,12 @@ class ProdutoDAO {
             $descricao = $produto_array['descricao'];
             $categoria = $categoria;
             $usado = $produto_array['usado'];
+            $isbn = $produto_array['isbn'];
+            $tipoProduto = $produto_array['tipoProduto'];
     
             $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+            $produto->setIsbn($isbn);
+            $produto->setTipoProduto($tipoProduto);
     
             array_push($produtos, $produto);
     
@@ -50,7 +54,7 @@ class ProdutoDAO {
     
     function alteraProduto(Produto $produto) {
         $query = "UPDATE produtos SET nome = '{$produto->getNome()}', preco = {$produto->getPreco()}, descricao = '{$produto->getDescricao()}', 
-            categoria_id= {$produto->getCategoria()->getId()}, usado = {$produto->isUsado()} WHERE id = '{$produto->getId()}'";
+            categoria_id = {$produto->getCategoria()->getId()}, usado = {$produto->isUsado()}, isbn = '{$produto->getIsbn()}', tipoProduto = '{$produto->getTipoProduto()}'  WHERE id = '{$produto->getId()}'";
             
         return mysqli_query($this->conexao, $query);
     }

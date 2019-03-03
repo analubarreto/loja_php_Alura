@@ -40,6 +40,7 @@ require_once "cabecalho.php";
 				<th scope="col">Descontado</th>
 				<th scope="col">Descrição</th>
 				<th scope="col">Categoria</th>
+				<th scope="col">ISBN</th>
 				<th scope="col">Alterar</th>
 				<th scope="col">Remover</th>
 			</tr>
@@ -56,6 +57,8 @@ require_once "cabecalho.php";
 					<td><?=$produto->precoComDesconto(0.2)?></td>
 			        <td><?=substr($produto->getDescricao(), 0, 40) ?></td>
 			        <td><?=$produto->getCategoria()->getNome();?></td>
+					<td><?=$produto->getIsbn()?></td>
+
 			        <td>
 			        	<a href="produto-altera-formulario.php?id=<?=$produto->getId()?>" class="btn btn-primary">alterar</a>
 			        </td>

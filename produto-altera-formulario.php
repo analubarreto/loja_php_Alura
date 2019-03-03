@@ -5,17 +5,31 @@ require_once "cabecalho.php";
 $id = $_GET['id'];
 
 $produtoDAO = new ProdutoDAO($conexao);
-$produto = $produtoDAO->buscaProduto($conexao, $id);
+$produto = $produtoDAO->buscaProduto($id);
 
 $categoriaDAO = new CategoriaDAO($conexao);
 $categorias = $categoriaDAO->listaCategorias($conexao);
 
-$selecao_usado = $produto->isUsado() ? "checked='checked'" : "";
+$categoria = new Categoria();
+$categoria->setId($_POST['categoria_id']);
+
+$nome = $_POST["nome"];
+$preco = $_POST["preco"];
+$descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
+$categoria = $categoria->setNome($categoria);
+$isbn = $_POST["isbn"];
+$tipoProduto = $_POST["tipoProduto"];
+
+$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+$produto->setIsbn($isbn);
+$produto->setTipoProduto($tipoProduto);
 
 // Se for usado, setar o botão checked = checked, se não, devolver ele vazio
-$produto->setUsado(selecao_usado());
+$selecao_usado = $produto->isUsado() ? "checked='checked'" : "";
 
-$selecao_usado = $produto->isUsado();
+$produto->setUsado(selecao_usado);
+
+// $selecao_usado = $produto->isUsado();
 
 ?>
 

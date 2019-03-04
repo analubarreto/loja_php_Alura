@@ -2,12 +2,12 @@
 
 class Produto {
 
-	protected $id;
-	protected $nome;
-	protected $preco;
-	protected $descricao;
-	protected $categoria;
-	protected $usado;
+	private $id;
+	private $nome;
+	private $preco;
+	private $descricao;
+	private $categoria;
+	private $usado;
 	
 	function __construct($nome, $preco, $descricao, Categoria $categoria, $usado) {
 		$this->nome = $nome;
@@ -25,6 +25,11 @@ class Produto {
 		if ($valor > 0 && $valor <= 0.5) {
 			return $this->preco - ($this->preco * $valor);
 		}	
+	}
+
+	public function calculaImposto() {
+		return $this->preco * 0.195;
+
 	}
 
 	public function hasIsbn() {

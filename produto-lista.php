@@ -28,16 +28,11 @@ require_once "cabecalho.php";
 <!-- inicio tabela -->
 <table class="table">
 	<thead>
-		<?php 
-			$produtoDAO = new ProdutoDAO($conexao);
-			$produtos = $produtoDAO->listaProdutos();
-
-		?>
 
 			<tr>
 				<th scope="col">Produto</th>
 				<th scope="col">Preço</th>
-				<th scope="col">Descontado</th>
+				<th scope="col">Imposto</th>
 				<th scope="col">Descrição</th>
 				<th scope="col">Categoria</th>
 				<th scope="col">ISBN</th>
@@ -45,20 +40,20 @@ require_once "cabecalho.php";
 				<th scope="col">Remover</th>
 			</tr>
 		<?php
-			// Para cada um desses produtos dentro do array produto, chama de produto
 			// Início foreach
-			$produtos = $produtoDAO->listaProdutos($conexao);
+			$produtoDAO = new ProdutoDAO($conexao);
+			$produtos = $produtoDAO->listaProdutos();
 			foreach($produtos as $produto) :
 			?>
 
 			    <tr>
 			        <td><?=$produto->getNome()?></td>
 					<td><?=$produto->getPreco()?></td>
-					<td><?=$produto->precoComDesconto(0.2)?></td>
+					<td><?=$produto->calculaImposto()?></td>
 			        <td><?=substr($produto->getDescricao(), 0, 40) ?></td>
 			        <td><?=$produto->getCategoria()->getNome();?></td>
 					<td>
-						<?=$produto->hasIsbn() ? $produto->getIsbn() : ""; ?>
+					<?=$produto->hasIsbn() ? $produto->getIsbn() : ""; ?>
 					</td>
 
 			        <td>
@@ -81,6 +76,5 @@ require_once "cabecalho.php";
 </table>
 
 <?php		
-	// Requisição do rodape.php
 	require_once "rodape.php";
 ?>

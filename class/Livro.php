@@ -13,4 +13,8 @@ class Livro extends Produto {
 		return $this;
 	}
 
+	public function calculaImposto() {
+		return $this->getPreco() * 0.065;
+	}
+
 }

@@ -8,26 +8,22 @@ $produtoDAO = new ProdutoDAO($conexao);
 $produto = $produtoDAO->buscaProduto($id);
 
 $categoriaDAO = new CategoriaDAO($conexao);
-$categorias = $categoriaDAO->listaCategorias($conexao);
+$categorias = $categoriaDAO->listaCategorias();
 
 $categoria = new Categoria();
 $categoria->setId($_POST['categoria_id']);
 
 $nome = $_POST["nome"];
 $preco = $_POST["preco"];
-$descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
+$descricao = $_POST["descricao"];
 $categoria = $categoria->setNome($categoria);
 $isbn = $_POST["isbn"];
 $tipoProduto = $_POST["tipoProduto"];
 
 $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 
-// Se for usado, setar o botão checked = checked, se não, devolver ele vazio
 $selecao_usado = $produto->isUsado() ? "checked='checked'" : "";
-
-$produto->setUsado(selecao_usado);
-
-// $selecao_usado = $produto->isUsado();
+$produto->setUsado($selecao_usado); 
 
 ?>
 

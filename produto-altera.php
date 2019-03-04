@@ -9,7 +9,7 @@ $categoria->setId($_POST['categoria_id']);
 $nome = $_POST["nome"];
 $preco = $_POST["preco"];
 $isbn = $_POST["isbn"];
-$descricao = $_POST["descricao"]; // Enviando a descrição através do corpo
+$descricao = $_POST["descricao"]; 
 $categoria = $categoria->setNome($categoria);
 $tipoProduto = $_POST["tipoProduto"];
 

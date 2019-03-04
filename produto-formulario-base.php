@@ -16,7 +16,7 @@
 
 	<tr>
 		<td>ISBN (caso seja um livro):</td>
-		<td><input class="form-control" type="number" name="preco" value="
+		<td><input class="form-control" type="number" name="isbn" value="
 		<?php if($produto->hasIsbn()) {
 			echo $produto->getIsbn(); }?>"></td>
 	</tr>

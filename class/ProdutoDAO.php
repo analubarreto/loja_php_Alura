@@ -11,7 +11,7 @@ class ProdutoDAO {
     function insereProduto(Produto $produto) {
 
         $isbn = "";
-        if($produto->hasIsbn) {
+        if($produto->hasIsbn()) {
             $isbn = $produto->getIsbn();
         }
 
@@ -29,19 +29,18 @@ class ProdutoDAO {
         $produtos = array();
         $resultado = mysqli_query($this->conexao, "SELECT p.*, c.nome AS categoria_nome FROM produtos AS p JOIN categorias AS c ON p.categoria_id = c.id");
     
-        // Enquanto houverem produtos sendo buscados pelo mysqli_fetch_assoc
         while($produto_array = mysqli_fetch_assoc($resultado)) {
     
             $categoria = new Categoria();
             $categoria->setNome($produto_array['categoria_nome']);
             
-            $produto_id = $produto_array['id'];
             $nome = $produto_array['nome'];
             $preco = $produto_array['preco'];
             $descricao = $produto_array['descricao'];
             $categoria = $categoria;
             $usado = $produto_array['usado'];
             $isbn = $produto_array['isbn'];
+            $tipoProduto = $produto_array['tipoProduto'];
 
             if ($tipoProduto == "Livro") {
                 $produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
@@ -60,15 +59,40 @@ class ProdutoDAO {
     }
     
     function buscaProduto($id) {
+
         $query = "SELECT * FROM produtos WHERE id = {$id}";
         $resultado = mysqli_query($this->conexao, $query);
         return mysqli_fetch_assoc($resultado);
+
+        $produto_buscado = mysqli_fetch_assoc($resultado);
+
+        $categoria = new Categoria();
+        $categoria->setId($produto_buscado['categoria_id']);
+
+        $nome = $produto_buscado['nome'];
+        $descricao = $produto_buscado['descricao'];
+        $preco = $produto_buscado['preco'];
+        $usado = $produto_buscado['preco'];
+        $isbn = $produto_buscado['isbn'];
+        $tipoProdudo = $produto_buscado['tipoProduto'];
+
+        if ($tipoProduto == "Livro") {
+            $produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+            $produto->setIsbn($isbn);
+        } else {
+            $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+        }
+
+        $produto->setId($produto_buscado['id']);
+
+        return $produto;
+
     }
     
     function alteraProduto(Produto $produto) {
 
         $isbn = "";
-        if($produto->hasIsbn) {
+        if($produto->hasIsbn()) {
             $isbn = $produto->getIsbn();
         }
 

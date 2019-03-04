@@ -21,8 +21,6 @@ $isbn = $_POST["isbn"];
 $tipoProduto = $_POST["tipoProduto"];
 
 $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-$produto->setIsbn($isbn);
-$produto->setTipoProduto($tipoProduto);
 
 // Se for usado, setar o botão checked = checked, se não, devolver ele vazio
 $selecao_usado = $produto->isUsado() ? "checked='checked'" : "";
@@ -39,7 +37,7 @@ $produto->setUsado(selecao_usado);
 			<h1 class="display-4">Alterar Produto</h1>
 		</div>
 			<div class="col-md-12">
-				<form action="altera-produto.php" method="post">
+				<form action="produto-altera.php" method="post">
 					<input type="hidden" name="id" value="<?=$produto->getId()?>">
 					<table class="table">
 						<?php require_once "produto-formulario-base.php"; ?>

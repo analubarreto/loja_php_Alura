@@ -15,8 +15,10 @@
 	</tr>
 
 	<tr>
-		<td>ISBN:</td> 
-		<td><input class="form-control" type="number" name="preco" value="<?=$produto->getIsbn()?>"></td>
+		<td>ISBN (caso seja um livro):</td> 
+		<td><input class="form-control" type="number" name="preco" value="
+		<?php if($produto->hasIsbn()) { 
+			echo $produto->getIsbn(); }?>"></td>
 	</tr>
 
 	<tr>
@@ -38,19 +40,19 @@
 	</tr>
 
 	<tr>
-		<td>Tipo Produto:</td>
+		<td>Tipo do Produto:</td>
 		<td>
 			<select name="tipoProduto">
 				<?php 
 				$tipos = array("Produto", "Livro");
 				foreach($tipos as $tipo) : 
-					$esseEhOTipo = $produto->getTipoProduto() == $tipo;
-					$selecao = $esseEhOTipo ? "selected='selected'" : "";
+					$esseEhOTipo = get_class($produto) == $tipo;
+					$selecaoTipo = $esseEhOTipo ? "selected='selected'" : "";
 					?>
-					<option type="radio" name="tipoProduto" value="<?=$tipo?>" class="form-control">
+					<option type="radio" name="tipoProduto" value="<?=$tipo?>" <?=$selecaoTipo?> class="form-control">
 						<?=$tipo?>		
 					</option>
 				<?php endforeach ?>
 			</select>
 		</td>
-	</tr>
+	</tr> 

@@ -57,7 +57,9 @@ require_once "cabecalho.php";
 					<td><?=$produto->precoComDesconto(0.2)?></td>
 			        <td><?=substr($produto->getDescricao(), 0, 40) ?></td>
 			        <td><?=$produto->getCategoria()->getNome();?></td>
-					<td><?=$produto->getIsbn()?></td>
+					<td>
+						<?=$produto->hasIsbn() ? $produto->getIsbn() : ""; ?>
+					</td>
 
 			        <td>
 			        	<a href="produto-altera-formulario.php?id=<?=$produto->getId()?>" class="btn btn-primary">alterar</a>

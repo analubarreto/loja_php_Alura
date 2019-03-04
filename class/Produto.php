@@ -2,15 +2,13 @@
 
 class Produto {
 
-	private $id;
-	private $nome;
-	private $preco;
-	private $descricao;
-	private $categoria;
-	private $usado;
-	private $isbn;
-	private $tipoProduto;
-
+	protected $id;
+	protected $nome;
+	protected $preco;
+	protected $descricao;
+	protected $categoria;
+	protected $usado;
+	
 	function __construct($nome, $preco, $descricao, Categoria $categoria, $usado) {
 		$this->nome = $nome;
 		$this->preco = $preco;
@@ -27,6 +25,10 @@ class Produto {
 		if ($valor > 0 && $valor <= 0.5) {
 			return $this->preco - ($this->preco * $valor);
 		}	
+	}
+
+	public function hasIsbn() {
+		return $this instanceof Livro;
 	}
 
 	public function getId() {
@@ -61,23 +63,6 @@ class Produto {
 	public function setUsado($usado) {
 		$this->usado = $usado;
 		return $this;
-	}
-
-	public function getIsbn() {
-		return $this->isbn;
-	}
-
-	public function setIsbn($isbn) {
-		$this->isbn = $isbn;
-		return $this;
-	}
-
-	public function getTipoProduto() {
-		return $this->tipoProduto;
-	}
-
-	public function setTipoProduto($tipoProduto) {
-		$this->getTipoProduto;
 	}
 	
 }

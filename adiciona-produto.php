@@ -1,7 +1,7 @@
 <?php 
 
 require_once "conecta.php";
-require_once "cabecalho.php";;
+require_once "cabecalho.php";
 require_once "logica-usuario.php";
 
 // Verifica se o usuário está logado
@@ -15,13 +15,16 @@ $preco = $_POST["preco"];
 $descricao = $_POST["descricao"];
 $categoria = $categoria->setNome($categoria);
 $isbn = $_POST["isbn"];
-$tipoProduto = $_POST["tipoProduto"];
+$tipoProduto = $_POST['tipoProduto'];
 
 array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
 
-$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-$produto->setIsbn($isbn);
-$produto->setTipoProduto($tipoProduto);
+if ($tipoProduto == "Livro") {
+	$produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+	$produto->setIsbn($isbn);
+} else {
+	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+}
 
 $produtoDAO = new ProdutoDAO($conexao);
 

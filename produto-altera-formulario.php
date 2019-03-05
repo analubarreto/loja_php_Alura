@@ -2,25 +2,13 @@
 
 require_once "cabecalho.php";
 
-$id = $_GET['id'];
-
 $produtoDAO = new ProdutoDAO($conexao);
 $produto = $produtoDAO->buscaProduto($id);
 
 $categoriaDAO = new CategoriaDAO($conexao);
 $categorias = $categoriaDAO->listaCategorias();
 
-$categoria = new Categoria();
-$categoria->setId($_POST['categoria_id']);
-
-$nome = $_POST["nome"];
-$preco = $_POST["preco"];
-$descricao = $_POST["descricao"];
-$categoria = $categoria->setNome($categoria);
-$isbn = $_POST["isbn"];
-$tipoProduto = $_POST["tipoProduto"];
-
-$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
+$id = $_GET['id'];
 
 $selecao_usado = $produto->isUsado() ? "checked='checked'" : "";
 $produto->setUsado($selecao_usado); 

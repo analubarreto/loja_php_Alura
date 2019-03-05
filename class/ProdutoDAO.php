@@ -73,7 +73,7 @@ class ProdutoDAO {
         $produto->atualizaBaseadoEm($produto_buscado);
 
         $produto->setId($produto_id);
-        $produto->getCategoria()->setNome($produto_buscado['categoria_nome']);
+        $produto->getCategoria()->setNome($categoria_id);
 
         return $produto;
 
@@ -99,7 +99,7 @@ class ProdutoDAO {
         $tipoProduto = get_class($produto);
 
         $query = "UPDATE produtos SET nome = '{$produto->getNome()}', preco = {$produto->getPreco()}, descricao = '{$produto->getDescricao()}', 
-            categoria_id = {$produto->getCategoria()->getId()}, usado = {$produto->isUsado()}, isbn = '{$isbn->getIsbn()}', tipoProduto = '{$tipoProduto->getTipoProduto()}', taxaImpressao = {$taxaImpressao->getTaxaImpressao()}, waterMark =  '{$waterMark->getWaterMark()}' WHERE id = '{$produto->getId()}'";
+            categoria_id = {$produto->getCategoria()->getId()}, usado = {$produto->isUsado()}, isbn = '{$isbn}', tipoProduto = '{$tipoProduto}', taxaImpressao = {$taxaImpressao}, waterMark =  '{$waterMark}' WHERE id = '{$produto->getId()}'";
             
         return mysqli_query($this->conexao, $query);
     }

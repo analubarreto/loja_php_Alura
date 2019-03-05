@@ -1,19 +1,16 @@
 <?php 
 
-require_once "conecta.php";
 require_once "cabecalho.php";
-require_once "logica-usuario.php";
-
-// Verifica se o usuário está logado
-verificaUsuario();
 
 $tipoProduto = $_POST['tipoProduto'];
+$produto_id = $_POST['id'];
 $categoria_id = $_POST['categoria_id'];
 
 $factory = new ProdutoFactory();
 $produto = $factory->criarProd($tipoProduto, $_POST);
-$produto->atualizaBaeadoEm($_POST);
+$produto->atualizaBaseadoEm($_POST);
 
+$produto->setId($produto_id);
 $produto->getCategoria()->setId($categoria_id);
 
 array_key_exists('usado', $_POST) ? $produto->setUsado("true") : $produto->setUsado("false");
@@ -37,7 +34,7 @@ if($produtoDAO->alteraProduto($produto)) {
  	?>
 	<form action="produto-lista.php">
 
-		<p class="text-danger"> O produto <?php echo $produto->getNome()?>, R$<?php echo $produto->getPreco();?> não foi alterado: <?php $msg; ?> </p>
+		<p class="text-danger"> O produto <?php echo $produto->getNome()?>, R$<?php echo $produto->getPreco();?> não foi alterado: <?php $msg; var_dump($produto)?> </p>
 		<button class="btn" type="submit">Voltar</button>
 
 	</form>

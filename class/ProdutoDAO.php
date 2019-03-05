@@ -27,7 +27,7 @@ class ProdutoDAO {
 
         $tipoProduto = get_class($produto);
 
-        $query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado, isbn, tipoProduto, taxaImpressao, waterMark) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->isUsado()}, '{$isbn}', '{$tipoProduo}, {$taxaImpressao}, '{$waterMark}')";
+        $query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado, isbn, tipoProduto, taxaImpressao, waterMark) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->isUsado()}, '{$isbn}', '{$tipoProduo}, '{$taxaImpressao}', '{$waterMark}')";
     
         // Retorno da execução da conexão (conexão, query)
         return mysqli_query($this->conexao, $query);

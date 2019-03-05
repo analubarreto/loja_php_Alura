@@ -5,26 +5,27 @@ DROP TABLE produtos;
 CREATE TABLE produtos (
 	id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	nome VARCHAR(255) NOT NULL,
-	preco DECIMAL(10,2) NOT NULL);
+	preco DECIMAL(10,2) NOT NULL),
+	descricao TEXT,
+	categoria_id INTEGER NOT NULL,
+	usado BOOLEAN DEFAULT FALSE,
+	isbn VARCHAR(255),
+	tipoProduto VARCHAR(255) NOT NULL
+);
 	
-INSERT INTO produtos VALUES(1, 'Carro', 20000);
-INSERT INTO produtos VALUES(2, 'Motocicleta', 10000);
-INSERT INTO produtos (nome, preco) VALUES('Bicicleta', 300);
-INSERT INTO produtos (nome, preco) VALUES('Livro Stephen King', 75);
+INSERT INTO produtos (nome, preco, descricao, categoria_id, usado, isbn)
+VALUES('Livro Stephen King', 75, 'Um livro pelo grande autor Stephen King', 5, 0, '002589753', 'Livro');
 
-DELETE FROM produtos WHERE id=9;
+INSERT INTO produtos
 
-ALTER TABLE produtos ADD COLUMN descricao TEXT;
-ALTER TABLE produtos ADD COLUMN categoria_id INTEGER NOT NULL;
-ALTER TABLE produtos ADD COLUMN usado BOOLEAN DEFAULT FALSE;
-ALTER TABLE produtos ADD COLUMN isbn VARCHAR(255);
-ALTER TABLE produtos ADD COLUMN tipoProduto VARCHAR(255) NOT NULL;
+DELETE FROM produtos WHERE id=2;
+DELETE FROM produtos WHERE id=8;
 
-UPDATE produtos SET descricao = "Descrição desse produto";
-UPDATE produtos SET categoria_id=3;
-UPDATE produtos SET categoria_id=4 WHERE id=15;
-UPDATE produtos SET categoria_id = 5 WHERE ID = 2;
-UPDATE produtos SET isbn = 111111111111 WHERE ID = 2;
+ALTER TABLE produtos ADD COLUMN taxaImpressao VARCHAR(255);
+ALTER TABLE produtos DROP COLUMN taxaImpressao;
+
+ALTER TABLE produtos ADD COLUMN waterMark VARCHAR(255);
+ALTER TABLE produtos DROP COLUMN waterMark;
 
 SELECT * FROM produtos;
 
@@ -35,10 +36,9 @@ CREATE TABLE categorias (
 	nome VARCHAR(255) NOT NULL
 );
 
-INSERT INTO categorias (nome) VALUES ("esporte"), ("escolar"), ("mobilidade");
-INSERT INTO categorias (nome) VALUES ("guloseimas");
-INSERT INTO categorias (nome) VALUES ("livros");
-INSERT INTO categorias (nome) VALUES ("eletrônicos");
+DROP TABLE categorias;
+
+INSERT INTO categorias (nome) VALUES ("Esporte"), ("Papelaria"), ("Mobilidade"), ("Guloseimas"), ("Livros"), ("Eletrônicos");
 
 SELECT * FROM categorias;
 

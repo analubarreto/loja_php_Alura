@@ -40,35 +40,14 @@ class ProdutoDAO {
         $resultado = mysqli_query($this->conexao, "SELECT p.*, c.nome AS categoria_nome FROM produtos AS p JOIN categorias AS c ON p.categoria_id = c.id");
     
         while($produto_array = mysqli_fetch_assoc($resultado)) {
-    
-            $categoria = new Categoria();
-            $categoria->setNome($produto_array['categoria_nome']);
-
-            $nome = $produto_array['nome'];
-            $descricao = $produto_array['descricao'];
-            $preco = $produto_array['preco'];
-            $usado = $produto_array['preco'];
-            $isbn = $produto_array['isbn'];
+            
             $tipoProduto = $produto_array['tipoProduto'];
-            $taxaImpressao = $produto_array['taxaImpressao'];
-            $waterMark = $produto_array['waterMark'];
 
+            $factory = new ProdutoFactory();
+            $produto = $factory->criarProd($tipoProduto, $produto_array);
+            $produto->atualizaBaseadoEm($produto_array);
 
-            $categoria = $categoria;
-
-            if ($tipoProduto == "Livro Físico") {
-                $produto = new LivroFisico($nome, $preco, $descricao, $categoria, $usado);
-                $produto->setIsbn($isbn);
-                $produto->setTaxaImpressao($taxaImpressao);
-            } else if ($tipoProduto == "Ebook") {
-                $produto = new Ebook($nome, $preco, $descricao, $categoria, $usado);
-                $produto->setIsbn($isbn);
-                $produto->setWaterMark($waterMark);
-            } else {
-                $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-            }
-
-            $produto->setId($produto_id);
+            $produto->getCategoria()->setNome($produto_array['categoria_nome']);
     
             array_push($produtos, $produto);
     
@@ -84,7 +63,7 @@ class ProdutoDAO {
         return mysqli_fetch_assoc($resultado);
 
         $produto_buscado = mysqli_fetch_assoc($resultado);
-
+        
         $categoria = new Categoria();
         $categoria->setId($produto_buscado['categoria_id']);
 

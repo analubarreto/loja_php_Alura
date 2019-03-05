@@ -28,6 +28,20 @@ class Produto {
 
 	}
 
+	public function atualizaBaseadoEm($params) {
+		if ($this->hasIsbn()) {
+			$this->setIsbn($params['isbn']);
+		}
+		
+		if ($this->hasTaxaImpressao()) {
+			$this->setTaxaImpressao($params['taxaImpressao']);
+		}
+		
+		if ($this->hasWaterMark()) {
+			$this->setWaterMark($params['waterMark']);
+		}
+	}
+
 	public function hasIsbn() {
 		return $this instanceof Livro;
 	}

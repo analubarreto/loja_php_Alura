@@ -7,31 +7,16 @@ require_once "logica-usuario.php";
 // Verifica se o usuário está logado
 verificaUsuario();
 
-$categoria = new Categoria();
-$categoria->setId($_POST['categoria_id']);
-
-$nome = $_POST["nome"];
-$preco = $_POST["preco"];
-$descricao = $_POST["descricao"];
-$categoria = $categoria->setNome($categoria);
-$isbn = $_POST["isbn"];
 $tipoProduto = $_POST['tipoProduto'];
-$taxaImpressao = $_POST['taxaImpressao'];
-$waterMark = $_POST['waterMark'];
+$categoria_id = $_POST['categoria_id'];
 
-array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
+$factory = new ProdutoFactory();
+$produto = $factory->criarProd($tipoProduto, $_POST);
+$produto->atualizaBaseadoEm($_POST);
 
-if ($tipoProduto == "Livro Físico") {
-	$produto = new LivroFisico($nome, $preco, $descricao, $categoria, $usado);
-	$produto->setIsbn($isbn);
-	$produto->setTaxaImpressao($taxaImpressao);
-} else if ($tipoProduto == "Ebook") {
-	$produto = new Ebook($nome, $preco, $descricao, $categoria, $usado);
-	$produto->setIsbn($isbn);
-	$produto->setWaterMark($waterMark);	
-} else {
-	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-}
+$produto->getCategoria()->setId($categoria_id);
+
+array_key_exists('usado', $_POST) ? $produto->setUsado("true") : $produto->setUsado("false");
 
 $produtoDAO = new ProdutoDAO($conexao);
 

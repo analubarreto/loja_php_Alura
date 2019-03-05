@@ -2,27 +2,21 @@
 
 require_once "conecta.php";
 require_once "cabecalho.php";
+require_once "logica-usuario.php";
 
-$categoria = new Categoria();
-$categoria->setId($_POST['categoria_id']);
+// Verifica se o usuário está logado
+verificaUsuario();
 
-$nome = $_POST["nome"];
-$preco = $_POST["preco"];
-$isbn = $_POST["isbn"];
-$descricao = $_POST["descricao"]; 
-$categoria = $categoria->setNome($categoria);
-$tipoProduto = $_POST["tipoProduto"];
+$tipoProduto = $_POST['tipoProduto'];
+$categoria_id = $_POST['categoria_id'];
 
-array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
+$factory = new ProdutoFactory();
+$produto = $factory->criarProd($tipoProduto, $_POST);
+$produto->atualizaBaeadoEm($_POST);
 
-if ($tipoProduto == "Livro") {
-	$produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
-	$produto->setIsbn($isbn);
-} else {
-	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-}
+$produto->getCategoria()->setId($categoria_id);
 
-$produto->setId($_POST['id']);
+array_key_exists('usado', $_POST) ? $produto->setUsado("true") : $produto->setUsado("false");
 
 $produtoDAO = new ProdutoDAO($conexao);
 

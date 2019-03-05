@@ -1,10 +1,12 @@
 <?php 
 
-// Requisições
 require_once "conecta.php";
 require_once "cabecalho.php";
-require_once "banco-produto.php";
+//require_once "banco-produto.php";
 require_once "logica-usuario.php";
+
+// Verifica se o usuário está logado
+verificaUsuario();
 
 $id = $_POST['id'];
 removeProduto($conexao, $id);

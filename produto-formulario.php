@@ -9,7 +9,7 @@ verificaUsuario();
 $categoria = new Categoria();
 $categoria->setId(1);
 
-$produto = new Produto("", "", "", $categoria, "");
+$produto = new LivroFisico("", "", "", $categoria, "");
 
 $categoriaDAO = new CategoriaDAO($conexao);
 $categorias = $categoriaDAO->listaCategorias();

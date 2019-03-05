@@ -2,7 +2,12 @@
 
 class LivroFisico extends Livro {
 
-    private $taxaImpressao;
+	private $taxaImpressao;
+	
+	public function atualizaBaseadoEm($params) {
+		$this->setIsbn($params['isbn']);
+		$this->setTaxaImpressao($params['taxaImpressao']);
+	}
 
 	public function getTaxaImpressao() {
 		return $this->taxaImpressao;

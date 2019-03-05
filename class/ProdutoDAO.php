@@ -64,31 +64,16 @@ class ProdutoDAO {
 
         $produto_buscado = mysqli_fetch_assoc($resultado);
         
-        $categoria = new Categoria();
-        $categoria->setId($produto_buscado['categoria_id']);
-
-        $nome = $produto_buscado['nome'];
-        $descricao = $produto_buscado['descricao'];
-        $preco = $produto_buscado['preco'];
-        $usado = $produto_buscado['preco'];
-        $isbn = $produto_buscado['isbn'];
         $tipoProduto = $produto_buscado['tipoProduto'];
-        $taxaImpressao = $produto_buscado['taxaImpressao'];
-        $waterMark = $produto_buscado['waterMark'];
+        $produto_id = $produto_buscado['id'];
+        $categoria_id = $produto_buscado['categoria_id'];
 
-        if ($tipoProduto == "Livro Físico") {
-            $produto = new LivroFisico($nome, $preco, $descricao, $categoria, $usado);
-            $produto->setIsbn($isbn);
-            $produto->setTaxaImpressao($taxaImpressao);
-        } else if ($tipoProduto == "Ebook") {
-            $produto = new Ebook($nome, $preco, $descricao, $categoria, $usado);
-            $produto->setIsbn($isbn);
-            $produto->setWaterMark($waterMark);
-        } else {
-            $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
-        }
+        $factory = new ProdutoFactory();
+        $produto = $factory->criarProd($tipoProduto, $produto_buscado);
+        $produto->atualizaBaseadoEm($produto_buscado);
 
-        $produto->setId($produto_buscado['id']);
+        $produto->setId($produto_id);
+        $produto->getCategoria()->setNome($produto_buscado['categoria_nome']);
 
         return $produto;
 
@@ -99,6 +84,16 @@ class ProdutoDAO {
         $isbn = "";
         if($produto->hasIsbn()) {
             $isbn = $produto->getIsbn();
+        }
+
+        $waterMark = "";
+        if($produto->hasWaterMark()) {
+            $waterMark = $produto->getWaterMark();
+        }
+
+        $taxaImpressao = "";
+        if($produto->hasTaxaImpressao()) {
+            $taxaImpressao = $produto->getTaxaImpressao();
         }
 
         $tipoProduto = get_class($produto);

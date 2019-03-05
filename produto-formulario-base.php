@@ -32,24 +32,18 @@
 		<td>
 			<select name="tipoProduto">
 				<?php
-				$tipos = array("Produto", "Livro Físico", "Ebook");
+				$tipos = array("Livro Físico", "Ebook");
 				foreach($tipos as $tipo) :
 					$tipoSemEspaco = str_replace(array(" ", "í"), array("", "i"), $tipo);
 					$esseEhOTipo = get_class($produto) == $tipoSemEspaco;
 					$selecaoTipo = $esseEhOTipo ? "selected='selected'" : "";
 					?> 
 
-					<?php
-						if($tipo == "Livro Físico") : ?>
 							<optgroup label="Livros">
-					<?php endif ?>
 								<option type="radio" name="tipoProduto" value="<?=$tipo?>" <?=$selecaoTipo?> class="form-control">
 									<?=$tipo?>
 								</option>
-					<?php 
-						if($tipo == "Ebook") : ?>
 							</optgroup>
-					<?php endif ?>
 						
 				<?php endforeach ?>
 			</select>

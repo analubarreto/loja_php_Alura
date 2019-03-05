@@ -17,10 +17,6 @@ class Produto {
 		$this->usado = $usado;
 	}
 
-	function __toString() {
-		return $this->nome . ": R$ " . $this->preco;
-	}
-
 	public function precoComDesconto($valor = 0.1) {
 		if ($valor > 0 && $valor <= 0.5) {
 			return $this->preco - ($this->preco * $valor);
@@ -34,6 +30,14 @@ class Produto {
 
 	public function hasIsbn() {
 		return $this instanceof Livro;
+	}
+
+	public function hasTaxaImpressao() {
+		return $this instanceof LivroFisico;
+	}
+
+	public function hasWaterMark() {
+		return $this instanceof Ebook;
 	}
 
 	public function getId() {

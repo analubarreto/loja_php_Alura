@@ -15,9 +15,19 @@ class ProdutoDAO {
             $isbn = $produto->getIsbn();
         }
 
+        $taxaImpressao = "";
+        if($produto->hasTaxaImpressao()) {
+            $taxaImpressao = $produto->getTaxaImpressao();
+        }
+
+        $waterMark = "";
+        if($produto->hasWaterMark()) {
+            $waterMark = $produto->getWaterMark();
+        }
+
         $tipoProduto = get_class($produto);
 
-        $query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado, isbn, tipoProduto) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->isUsado()}, '{$isbn}', '{$tipoProduto}')";
+        $query = "INSERT INTO produtos (nome, preco, descricao, categoria_id, usado, isbn, tipoProduto, taxaImpressao, waterMark) VALUES('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->isUsado()}, '{$isbn}', '{$tipoProduo}, {$taxaImpressao}, '{$waterMark}')";
     
         // Retorno da execução da conexão (conexão, query)
         return mysqli_query($this->conexao, $query);
@@ -33,18 +43,27 @@ class ProdutoDAO {
     
             $categoria = new Categoria();
             $categoria->setNome($produto_array['categoria_nome']);
-            
+
             $nome = $produto_array['nome'];
-            $preco = $produto_array['preco'];
             $descricao = $produto_array['descricao'];
-            $categoria = $categoria;
-            $usado = $produto_array['usado'];
+            $preco = $produto_array['preco'];
+            $usado = $produto_array['preco'];
             $isbn = $produto_array['isbn'];
             $tipoProduto = $produto_array['tipoProduto'];
+            $taxaImpressao = $produto_array['taxaImpressao'];
+            $waterMark = $produto_array['waterMark'];
 
-            if ($tipoProduto == "Livro") {
-                $produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+
+            $categoria = $categoria;
+
+            if ($tipoProduto == "Livro Físico") {
+                $produto = new LivroFisico($nome, $preco, $descricao, $categoria, $usado);
                 $produto->setIsbn($isbn);
+                $produto->setTaxaImpressao($taxaImpressao);
+            } else if ($tipoProduto == "Ebook") {
+                $produto = new Ebook($nome, $preco, $descricao, $categoria, $usado);
+                $produto->setIsbn($isbn);
+                $produto->setWaterMark($waterMark);
             } else {
                 $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
             }
@@ -74,11 +93,18 @@ class ProdutoDAO {
         $preco = $produto_buscado['preco'];
         $usado = $produto_buscado['preco'];
         $isbn = $produto_buscado['isbn'];
-        $tipoProdudo = $produto_buscado['tipoProduto'];
+        $tipoProduto = $produto_buscado['tipoProduto'];
+        $taxaImpressao = $produto_buscado['taxaImpressao'];
+        $waterMark = $produto_buscado['waterMark'];
 
-        if ($tipoProduto == "Livro") {
-            $produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+        if ($tipoProduto == "Livro Físico") {
+            $produto = new LivroFisico($nome, $preco, $descricao, $categoria, $usado);
             $produto->setIsbn($isbn);
+            $produto->setTaxaImpressao($taxaImpressao);
+        } else if ($tipoProduto == "Ebook") {
+            $produto = new Ebook($nome, $preco, $descricao, $categoria, $usado);
+            $produto->setIsbn($isbn);
+            $produto->setWaterMark($waterMark);
         } else {
             $produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
         }
@@ -99,7 +125,7 @@ class ProdutoDAO {
         $tipoProduto = get_class($produto);
 
         $query = "UPDATE produtos SET nome = '{$produto->getNome()}', preco = {$produto->getPreco()}, descricao = '{$produto->getDescricao()}', 
-            categoria_id = {$produto->getCategoria()->getId()}, usado = {$produto->isUsado()}, isbn = '{$isbn}', tipoProduto = '{$tipoProduto}'  WHERE id = '{$produto->getId()}'";
+            categoria_id = {$produto->getCategoria()->getId()}, usado = {$produto->isUsado()}, isbn = '{$isbn->getIsbn()}', tipoProduto = '{$tipoProduto->getTipoProduto()}', taxaImpressao = {$taxaImpressao->getTaxaImpressao()}, waterMark =  '{$waterMark->getWaterMark()}' WHERE id = '{$produto->getId()}'";
             
         return mysqli_query($this->conexao, $query);
     }

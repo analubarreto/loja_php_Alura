@@ -16,12 +16,19 @@ $descricao = $_POST["descricao"];
 $categoria = $categoria->setNome($categoria);
 $isbn = $_POST["isbn"];
 $tipoProduto = $_POST['tipoProduto'];
+$taxaImpressao = $_POST['taxaImpressao'];
+$waterMark = $_POST['waterMark'];
 
 array_key_exists('usado', $_POST) ? $usado = "true" : $usado = "false";
 
-if ($tipoProduto == "Livro") {
-	$produto = new Livro($nome, $preco, $descricao, $categoria, $usado);
+if ($tipoProduto == "Livro Físico") {
+	$produto = new LivroFisico($nome, $preco, $descricao, $categoria, $usado);
 	$produto->setIsbn($isbn);
+	$produto->setTaxaImpressao($taxaImpressao);
+} else if ($tipoProduto == "Ebook") {
+	$produto = new Ebook($nome, $preco, $descricao, $categoria, $usado);
+	$produto->setIsbn($isbn);
+	$produto->setWaterMark($waterMark);	
 } else {
 	$produto = new Produto($nome, $preco, $descricao, $categoria, $usado);
 }

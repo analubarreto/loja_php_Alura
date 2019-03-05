@@ -15,18 +15,6 @@
 	</tr>
 
 	<tr>
-		<td>ISBN (caso seja um livro):</td>
-		<td><input class="form-control" type="number" name="isbn" value="
-		<?php if($produto->hasIsbn()) {
-			echo $produto->getIsbn(); }?>"></td>
-	</tr>
-
-	<tr>
-		<td></td>
-		<td><input type="checkbox" name="usado" value="true" <?=$produto->isUsado()?>> Usado</td>
-	</tr>
-
-	<tr>
 		<td>Categoria:</td>
 		<td>
 			<select name="categoria_id">
@@ -44,15 +32,52 @@
 		<td>
 			<select name="tipoProduto">
 				<?php
-				$tipos = array("Produto", "Livro");
+				$tipos = array("Produto", "Livro Físico", "Ebook");
 				foreach($tipos as $tipo) :
-					$esseEhOTipo = get_class($produto) == $tipo;
+					$tipoSemEspaco = str_replace(array(" ", "í"), array("", "i"), $tipo);
+					$esseEhOTipo = get_class($produto) == $tipoSemEspaco;
 					$selecaoTipo = $esseEhOTipo ? "selected='selected'" : "";
-					?>
-					<option type="radio" name="tipoProduto" value="<?=$tipo?>" <?=$selecaoTipo?> class="form-control">
-						<?=$tipo?>
-					</option>
+					?> 
+
+					<?php
+						if($tipo == "Livro Físico") : ?>
+							<optgroup label="Livros">
+					<?php endif ?>
+								<option type="radio" name="tipoProduto" value="<?=$tipo?>" <?=$selecaoTipo?> class="form-control">
+									<?=$tipo?>
+								</option>
+					<?php 
+						if($tipo == "Ebook") : ?>
+							</optgroup>
+					<?php endif ?>
+						
 				<?php endforeach ?>
 			</select>
 		</td>
+	</tr>
+
+	<tr>
+		<td>ISBN:</td>
+		<td><input class="form-control" type="number" name="isbn" value="
+		<?php if($produto->hasIsbn()) {
+			echo $produto->getIsbn(); }?>"></td>
+	</tr>
+
+	<tr>
+		<td>Taxa de Impressão:</td>
+		<td><input class="form-control" type="number" name="taxaImpressao" value="
+		<?php if($produto->hasTaxaImpressao()) {
+			echo $produto->getTaxaImpressao(); }?>"></td>
+	</tr>
+
+	<tr>
+		<td>Water Mark:</td>
+		<td><input class="form-control" type="number" name="waterMark" value="
+		<?php if($produto->hasWaterMark()) {
+			echo $produto->getWaterMark(); }?>"></td>
+	</tr>
+
+	<tr>
+		<td></td>
+		<td><input type="checkbox" name="usado" value="true" <?=$produto->isUsado()?>> Usado</td>
 	</tr>

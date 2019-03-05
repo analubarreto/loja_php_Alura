@@ -36,6 +36,8 @@ require_once "cabecalho.php";
 				<th scope="col">Descrição</th>
 				<th scope="col">Categoria</th>
 				<th scope="col">ISBN</th>
+				<th scope="col">Taxa de Impressão</th>
+				<th scope="col">Marca D'agua</th>
 				<th scope="col">Alterar</th>
 				<th scope="col">Remover</th>
 			</tr>
@@ -54,6 +56,12 @@ require_once "cabecalho.php";
 			        <td><?=$produto->getCategoria()->getNome();?></td>
 					<td>
 					<?=$produto->hasIsbn() ? $produto->getIsbn() : ""; ?>
+					</td>
+					<td>
+					<?=$produto->hasTaxaImpressao() ? $produto->getTaxaImpressao() : ""; ?>
+					</td>
+					<td>
+					<?=$produto->hasWaterMark() ? $produto->getWaterMark() : ""; ?>
 					</td>
 
 			        <td>
